@@ -106,7 +106,16 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Configuration\ConfigurationFileReader.cs" />
+    <Compile Include="Eugene.cs" />
+    <Compile Include="Exception\EugeneException.cs" />
+    <Compile Include="Exception\InvalidConfigurationFileException.cs" />
+    <Compile Include="Exception\InvalidNetworkPath.cs" />
+    <Compile Include="Exception\InvalidRemoteVersion.cs" />
+    <Compile Include="Exception\UnknownConfigurationKeyException.cs" />
+    <Compile Include="Network\RemoteDownloadLocation.cs" />
+    <Compile Include="Network\RemoteFileReader.cs" />
+    <Compile Include="Network\RemoteVersionChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\EugeneForUwp.rd.xml" />
   </ItemGroup>
