@@ -29,14 +29,14 @@ namespace EugeneForUwp.Network
 
         private RemoteFileReader() { }
 
-        private void _readRemoteFile()
+        private async void _readRemoteFileAsync()
         {
             if (RemoteLocation == null) throw new InvalidNetworkPath("No network URL given");
             if (!RemoteLocation.EndsWith(".eug")) throw new InvalidNetworkPath("The remote file is not an Eugene file");
             values = new Dictionary<string, string>();
             using (var client = new System.Net.Http.HttpClient())
             {
-                var response = client.GetAsync(RemoteLocation).Result;
+                var response = await client.GetAsync(RemoteLocation);
                 try
                 {
                     response.EnsureSuccessStatusCode();
@@ -50,7 +50,12 @@ namespace EugeneForUwp.Network
                 foreach (var line in lines)
                 {
                     string[] keyValue = Regex.Split(line, ">");
-                    values.Add(keyValue[0], keyValue[1]);
+                    try
+                    {
+                        values.Add(keyValue[0], keyValue[1]);
+                    }
+                    catch (IndexOutOfRangeException)//when the last line is empty
+                    {}
                 }
             }
         }
@@ -73,7 +78,7 @@ namespace EugeneForUwp.Network
         /// <exception cref="InvalidNetworkPath">If the network path is null or invalid</exception>
         public void ReadRemoteFile()
         {
-            _readRemoteFile();
+            _readRemoteFileAsync();
         }
 
     }

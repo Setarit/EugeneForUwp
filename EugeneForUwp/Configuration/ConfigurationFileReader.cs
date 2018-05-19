@@ -26,7 +26,7 @@ namespace EugeneForUwp.Configuration
             foreach(var line in _configFileLines)
             {
                 string[] splitted = line.Split('>');
-                if (splitted.Length < 2) throw new InvalidConfigurationFileException("Configuration file is not well formatted");
+                if (splitted.Length < 2) throw new InvalidConfigurationFileException("Configuration file is not well formatted. Make sure the last line is not blank.");
                 _valuesMap.Add(splitted[0], splitted[1]);
             }
         }
