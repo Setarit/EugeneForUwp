@@ -14,16 +14,16 @@ namespace EugeneForUwp.Network
         {
             _remoteFileReader = RemoteFileReader.GetInstance();
             _remoteFileReader.RemoteLocation = _remoteLocation;
-            _remoteFileReader.ReadRemoteFile();
         }
 
         /// <summary>
         /// Reads the remote Eugene file for the location where the new software version can be downloaded
         /// </summary>
         /// <returns>The location where the new software version can be downloaded</returns>
-        public string GetDownloadLocation()
+        public async System.Threading.Tasks.Task<string> GetDownloadLocationAsync()
         {
-            return _remoteFileReader.GetValue("download");
+            await _remoteFileReader.ReadRemoteFileAsync();
+            return _remoteFileReader.Configuration.GetValue("download");
         }
     }
 }

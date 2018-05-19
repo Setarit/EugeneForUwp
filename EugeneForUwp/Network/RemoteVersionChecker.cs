@@ -30,12 +30,12 @@ namespace EugeneForUwp.Network
         /// </summary>
         /// <exception cref="InvalidRemoteVersion">If the file on the given location is in an invalid format</exception>
         /// <returns>The remote version number</returns>
-        public double GetRemoteVersionNumber()
+        public async Task<double> GetRemoteVersionNumberAsync()
         {
             var networkReader = RemoteFileReader.GetInstance();
             networkReader.RemoteLocation = _remoteLocation;
-            networkReader.ReadRemoteFile();
-            return _remoteVersionRetreiveTask(networkReader.GetValue("version"));
+            await networkReader.ReadRemoteFileAsync();
+            return _remoteVersionRetreiveTask(networkReader.Configuration.GetValue("version"));
         }
 
         private double _remoteVersionRetreiveTask(string version)

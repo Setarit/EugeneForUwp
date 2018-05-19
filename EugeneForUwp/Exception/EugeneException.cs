@@ -1,6 +1,6 @@
 ﻿namespace EugeneForUwp.Exception
 {
-    class EugeneException : System.Exception
+    public class EugeneException : System.Exception
     {
         public EugeneException()
         {
